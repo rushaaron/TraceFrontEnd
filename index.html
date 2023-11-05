@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Neuron Tracer</title>
+    <link rel="stylesheet" type="text/css" href="style.css"
+</head>
+<body>
+    <h1>Welcome to a Simple Neuron Tracer NeuronJ plugin for Fiji</h1>
+    
+    <div id="pretext">
+        <p>
+            Shorten the amount of time needed to hand trace an image of a sensory neuron. 
+            This program takes in a sensory neuron image, and will attempt to trace and gather statistics on the image.
+            A NDF file will be returned that can be uploaded to the NeuronJ plugin for Fiji to continue where the program left off.
+            Other JPEG images will also be returned to help visual the results from the tracing.
+        </p>
+    </div>
+
+    <ol class="custom-list">
+        <li>
+            <span class="list-number">1</span>
+            <div class="list-content">
+                <span class="list-text">For best results, fill in the eye with a pink color. Otherwise, the program will try and automatically detect and trace the eye, but if it's not dark enough results may vary.</span>
+            </div>
+        </li>
+        <li>
+            <span class="list-number">2</span>
+            <div class="list-content">
+                <span class="list-text">Click the Choose File button and upload a sensory neuron image. See below for examples.</span>
+            </div>
+        </li>
+        <li>
+            <span class="list-number">3</span>
+            <div class="list-content">
+                <span class="list-text">Click the Trace Image button to start trying the uploaded image.</span>
+            </div>
+        </li>
+        <li>
+            <span class="list-number">4</span>
+            <div class="list-content">
+                <span class="list-text">See the Preview image to preview the results from the tracing.</span>
+            </div>
+        </li>
+        <li>
+            <span class="list-number">5</span>
+            <div class="list-content">
+                <span class="list-text">Click the Download Traced Images button to download traced images and the NDF file.</span>
+            </div>
+        </li>
+    </ol>
+
+    <!-- Image Drop Box -->
+    <div id="image-drop">
+        <h2>Upload Your Image Here</h2>
+        <input type="file" id="file-input" accept="image/jpeg" />
+        <img id="preview" src="" alt="Preview" />
+    </div>
+
+    <div id="parameters">
+        <label for="input1" class="inputLabel">RGB Shade Of All Branches:</label><br>
+        <input type="number" id="input1" name="input1" min="0" max="254" step="1" value="230" class="inputBox"><br>    
+        <label for="input2" class="inputLabel">RGB Shade Of Branches Connected to the Cell Body:</label><br>
+        <input type="number" id="input2" name="input1" min="0" max="254" step="1" value="220" class="inputBox"><br>    
+        <label for="input3" class="inputLabel">X Offset:</label><br>
+        <input type="number" id="input3" name="input1" min="5" max="100" step="1" value="40" class="inputBox"><br>   
+        <label for="input4" class="inputLabel">Y Offset:</label><br>
+        <input type="number" id="input4" name="input1" min="5" max="100" step="1" value="40" class="inputBox"> <br>  
+        <input type="submit" value="Submit" class="submitButton">
+    </div>
+
+    <!-- Bottom Text -->
+    <div id="help-text">
+        <p>This is a simple website example with a title, an image drop box, and bottom text.</p>
+        <p>Here's an example of a high constrast image that needs to have the cell filled in with pink, as the cell is the same shade as the branches.</p>
+        <label for="HCExample">1.</label>
+        <img src="outline.jpeg" id="HCExample" class="ExamplePicture">
+        <label for="HCExamplePink">2.</label>
+        <img src="outlinePink.jpg" id="HCExamplePink" class="ExamplePicture">
+        <label for="HCExampleTraced">3.</label>
+        <img src="outlinePinkTracedImage.jpg" id="HCExampleTraced" class="ExamplePicture">
+        <label for="HCExampleWhite">4.</label>
+        <img src="outlinePinkTracedImageWhite.jpg" id="HCExampleWhite" class="ExamplePicture">
+    </div>
+
+    <!-- Script for Image Preview -->
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const imagePreview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '';
+            }
+        });
+    </script>
+
+    <!-- Script for the Submit button -->
+        <script>
+            document.getElementById('integerForm').addEventListener('submit', function(event) {
+                // Check if any of the input fields are empty
+                const inputs = document.querySelectorAll('input[type="number"]');
+                let isEmpty = false;
+                inputs.forEach(function(input) {
+                    if (!input.value) {
+                        isEmpty = true;
+                    }
+                });
+    
+                // If any input is empty, prevent the form submission and show an error message
+                if (isEmpty) {
+                    alert('Please fill in all the integer fields.');
+                    event.preventDefault();
+                }
+            });
+        </script>
+</body>
+</html>

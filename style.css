@@ -1,0 +1,99 @@
+body {
+    color: black;
+    background-color: rgb(250, 250, 250);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  #help-text {
+  }
+
+  /* Style for the custom list */
+.custom-list {
+  list-style: none; /* Remove default list styles */
+  padding: 0;
+}
+
+/* Style for list items */
+.custom-list li {
+  margin-bottom: 10px;
+  display: flex; /* Use flex display to control item layout */
+  align-items: center; /* Center vertically within the list item */
+}
+
+/* Style for list numbers */
+.list-number {
+  width: 20px; /* Adjust the width as needed */
+  color: gray; /* Color of the number */
+  text-align: right; /* Right-align the number */
+  padding-right: 5px;
+}
+
+/* Style for the list content (text and separator) */
+.list-content {
+  flex: 1; /* Expand to fill remaining space */
+  display: flex; /* Use flex display to control content layout */
+  align-items: center; /* Center vertically within the content */
+  border-left: 1px solid rgba(56, 56, 56, 0.5);
+  padding-left: 5px;
+}
+
+/* Style for the list separator */
+.list-separator {
+  border-left: 1px solid gray; /* Create a vertical line as a separator */
+  margin: 0 10px; /* Adjust the spacing */
+}
+
+/* Style for list text */
+.list-text {
+  display: block;
+}
+
+/* Style for the preview image*/
+#preview {
+  max-width: 300px;
+  max-height: 400px;
+}
+
+/* Style for the example pictures*/
+.ExamplePicture {
+  max-width: 200px;
+  max-height: 300px;
+  border: 1px solid black;
+}
+
+/* Style for the input boxes*/
+.inputBox {
+  box-sizing: border-box;
+  box-shadow: 0 0 10px .5px rgba(0, 0, 0, 0.3);
+  border: 0;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 3px;
+  width: 60px;
+  text-align: center;
+}
+
+.inputLabel {
+  width: 75%;
+}
+
+.submitButton {
+  padding: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: whitesmoke;
+  background-color: #2E71B7;
+  border: none;
+  border-radius: 5px;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+label {
+  display: inline-block;
+  vertical-align: top;
+}
+
