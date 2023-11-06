@@ -2,10 +2,10 @@ body {
     color: black;
     background-color: rgb(250, 250, 250);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    max-width: 900px;
   }
 
-  #help-text {
-  }
+/* -------- Header and Help Text --------*/
 
   /* Style for the custom list */
 .custom-list {
@@ -48,17 +48,17 @@ body {
   display: block;
 }
 
-/* Style for the preview image*/
-#preview {
+/* -------- Input box and Form --------*/
+
+form {
+  background-color: rgb(219, 219, 219);
   max-width: 300px;
-  max-height: 400px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-/* Style for the example pictures*/
-.ExamplePicture {
-  max-width: 200px;
-  max-height: 300px;
-  border: 1px solid black;
+#file-input {
+  padding-bottom: 10px;
 }
 
 /* Style for the input boxes*/
@@ -70,26 +70,13 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 3px;
-  width: 60px;
+  width: 50px;
   text-align: center;
 }
 
 .inputLabel {
   width: 75%;
-}
-
-.submitButton {
-  padding: 5px;
-  padding-left: 30px;
-  padding-right: 30px;
-  color: whitesmoke;
-  background-color: #2E71B7;
-  border: none;
-  border-radius: 5px;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
+  padding: 10px;
 }
 
 label {
@@ -97,3 +84,58 @@ label {
   vertical-align: top;
 }
 
+.submitButton {
+  padding: 7px 30px;
+  color: whitesmoke;
+  background-color: #2E71B7;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+}
+
+input[type=submit]:hover {
+  background-color: #84FF87;
+  color: black;
+}
+
+#lineSeparator {
+  border-top: 1px solid rgba(56, 56, 56, 0.5);
+}
+
+#downloadButton {
+  /*display: none;*/
+  padding: 7px;
+  background-color: #2E71B7;
+  color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#downloadButton:enabled:hover {
+  color: black;
+  background-color: #84FF87;
+}
+
+#downloadButton:disabled {
+  background-color: #ccc;
+  color: #c54444;
+  cursor: not-allowed;
+}
+
+/* -------- Example Pictures --------*/
+
+/* Style for the preview image*/
+#tracedPreview {
+  padding-top: 20px;
+  max-width: 300px;
+  max-height: 400px;
+}
+
+/* Style for the example pictures*/
+.ExamplePicture {
+  max-width: 200px;
+  max-height: 300px;
+  border: 1px solid black;
+}

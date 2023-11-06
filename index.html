@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Neuron Tracer</title>
-    <link rel="stylesheet" type="text/css" href="style.css"
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h1>Welcome to a Simple Neuron Tracer NeuronJ plugin for Fiji</h1>
@@ -16,6 +16,7 @@
         </p>
     </div>
 
+    <!-- Direction List-->
     <ol class="custom-list">
         <li>
             <span class="list-number">1</span>
@@ -49,26 +50,29 @@
         </li>
     </ol>
 
-    <!-- Image Drop Box -->
-    <div id="image-drop">
+    <!-- Upload Form-->
+    <form id="myForm">
         <h2>Upload Your Image Here</h2>
         <input type="file" id="file-input" accept="image/jpeg" />
-        <img id="preview" src="" alt="Preview" />
-    </div>
-
-    <div id="parameters">
-        <label for="input1" class="inputLabel">RGB Shade Of All Branches:</label><br>
-        <input type="number" id="input1" name="input1" min="0" max="254" step="1" value="230" class="inputBox"><br>    
-        <label for="input2" class="inputLabel">RGB Shade Of Branches Connected to the Cell Body:</label><br>
-        <input type="number" id="input2" name="input1" min="0" max="254" step="1" value="220" class="inputBox"><br>    
-        <label for="input3" class="inputLabel">X Offset:</label><br>
-        <input type="number" id="input3" name="input1" min="5" max="100" step="1" value="40" class="inputBox"><br>   
-        <label for="input4" class="inputLabel">Y Offset:</label><br>
-        <input type="number" id="input4" name="input1" min="5" max="100" step="1" value="40" class="inputBox"> <br>  
+        <label for="input1" class="inputLabel">RGB Shade Of All Branches:</label>
+        <input type="number" id="input1" name="input1" min="0" max="254" step="1" value="230" dValue ="230" class="inputBox"><br>    
+        <label for="input2" class="inputLabel">RGB Shade Of Branches Connected to the Cell Body:</label>
+        <input type="number" id="input2" name="input1" min="0" max="254" step="1" value="220" dValue ="220" class="inputBox"><br>    
+        <label for="input3" class="inputLabel">X Offset:</label>
+        <input type="number" id="input3" name="input1" min="5" max="100" step="1" value="40" dValue ="40" class="inputBox"><br>   
+        <label for="input4" class="inputLabel">Y Offset:</label>
+        <input type="number" id="input4" name="input1" min="5" max="100" step="1" value="40" dValue ="40" class="inputBox"> <br>  
         <input type="submit" value="Submit" class="submitButton">
-    </div>
+        <p id="lineSeparator"></p>
+        <button id="downloadButton" disabled>Download Files</button>
+    </form>
 
-    <!-- Bottom Text -->
+    <!-- Image Preview -->
+    <div id="image-preview">
+        <img id="tracedPreview" src="" />
+    </div> 
+
+    <!-- Help Text and pictures -->
     <div id="help-text">
         <p>This is a simple website example with a title, an image drop box, and bottom text.</p>
         <p>Here's an example of a high constrast image that needs to have the cell filled in with pink, as the cell is the same shade as the branches.</p>
@@ -82,43 +86,38 @@
         <img src="outlinePinkTracedImageWhite.jpg" id="HCExampleWhite" class="ExamplePicture">
     </div>
 
+    <!-- Script for uploading image-->
+    <script>
+        const imageUpload = document.getElementById("imageUpload");
+        imageUpload.addEventListener("change", function() {
+            uploadingPreview(imageUpload);
+        });
+
+    </script>
+
+    <!-- Script for downloading image-->
+    <script>
+        downloadButton.addEventListener("click", function() {
+            downloadImage();
+        });
+    </script>
+
     <!-- Script for Image Preview -->
     <script>
         const fileInput = document.getElementById('file-input');
-        const imagePreview = document.getElementById('preview');
 
         fileInput.addEventListener('change', function () {
-            const file = fileInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    imagePreview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                imagePreview.src = '';
-            }
+            changePreviewPicture(fileInput);
         });
     </script>
 
     <!-- Script for the Submit button -->
-        <script>
-            document.getElementById('integerForm').addEventListener('submit', function(event) {
-                // Check if any of the input fields are empty
-                const inputs = document.querySelectorAll('input[type="number"]');
-                let isEmpty = false;
-                inputs.forEach(function(input) {
-                    if (!input.value) {
-                        isEmpty = true;
-                    }
-                });
-    
-                // If any input is empty, prevent the form submission and show an error message
-                if (isEmpty) {
-                    alert('Please fill in all the integer fields.');
-                    event.preventDefault();
-                }
-            });
-        </script>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            onFormSubmit();
+        });
+    </script>
+    <script src="javascript.js"></script>
 </body>
 </html>
