@@ -47,3 +47,9 @@ function downloadImage() {
     a.click();
     document.body.removeChild(a);
 }
+
+// Validation only single direction fields were entered for the stem to ignore
+function validateDirection(input) {
+    input.value = input.value.replace(/[^NnSsWwEe]|/g, '');
+    input.value = input.value.toUpperCase();
+}

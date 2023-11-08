@@ -49,12 +49,19 @@ body {
 }
 
 /* -------- Input box and Form --------*/
+.container {
+  display: flex;
+  align-items: flex-start;
+}
 
-form {
+#myForm {
   background-color: rgb(219, 219, 219);
   max-width: 300px;
   padding: 10px;
   border-radius: 5px;
+  flex: 2;
+  margin-right: 20px;
+  margin-left: 125px;
 }
 
 #file-input {
@@ -124,18 +131,19 @@ input[type=submit]:hover {
   cursor: not-allowed;
 }
 
-/* -------- Example Pictures --------*/
-
 /* Style for the preview image*/
 #tracedPreview {
-  padding-top: 20px;
-  max-width: 300px;
-  max-height: 400px;
+  flex: 1;
+  padding-top: 10px;
+  max-width: 350px;
+  max-height: 450px;
 }
+
+/* -------- Example Pictures --------*/
 
 /* Style for the example pictures*/
 .ExamplePicture {
-  max-width: 200px;
+  max-width: 400px;
   max-height: 300px;
   border: 1px solid black;
 }
