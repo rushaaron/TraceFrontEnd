@@ -1,3 +1,5 @@
+let signedUrl = null;
+
 // Running the tracing
 function onFormSubmit() {
 
@@ -19,9 +21,6 @@ function onFormSubmit() {
     const xOffset = document.getElementById('input3').value;
     const yOffset = document.getElementById('input4').value;
     const stemToIgnore = document.getElementById('input5');
-    console.log("Stem: " + stemToIgnore);
-    console.log("redbranch: " + redBranch);
-
     // Prepare the data to be sent
    
     if (fileInput.files.length > 0) {
@@ -50,10 +49,18 @@ function onFormSubmit() {
             .then(response => response.text())
             // Uploading image to website
             .then(data => {                
-                const picToChange = document.getElementById("tempPic");
-                picToChange.src = "data:image/jpeg;base64," + data;
+                const parsedResponse = JSON.parse(data);
+                signedUrl = parsedResponse.signedUrl;
+                const tracedExample = parsedResponse.tracedExample;
+              
+                const picToChange = document.getElementById("tracedPreview");
+                picToChange.src = "data:image/jpeg;base64," + tracedExample;
                 
-                console.log('Image processed and uploaded:', data);
+                // Enable the download button
+                const downloadButton = document.getElementById("downloadButton");
+                downloadButton.disabled = false;
+                downloadButton.style.display = "block";         
+                console.log("Image Processed")
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -64,42 +71,25 @@ function onFormSubmit() {
     } else {
         console.error('No file selected.');
     }
-}
+}  
 
-function yeetonthyfeet() {  
-    const xValue = document.getElementById('input1').value;
-    const yValue = document.getElementById('input1').value;
-    const messageValue = document.getElementById('input4').value;
-
-    // Prepare the data to be sent
-   const requestData = {
-        x: parseInt(xValue),
-        y: parseInt(yValue),
-        message: messageValue
-    };
-
-    // Make a POST request to the API Gateway endpoint
-    fetch('https://5bdlgmqza6.execute-api.us-east-1.amazonaws.com/simpleBeta/SimpleResource', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle the response data as needed
-        console.log('API Gateway response:', data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+function downloadZipFile() {
+    // Decode base64 data to binary
+    if (signedUrl) {
+        const link = document.createElement("a");
+        link.href = signedUrl;
+        link.download = "processed_images.zip";
+        // Use the click() method of the anchor element to initiate the download.
+        link.click();
+    } else {
+        console.error('No ZIP data available');
+    }
 }
 
 // Changing the preview image
 function changePreviewPicture(fileInput) {
     const imagePreview = document.getElementById('tracedPreview');
-    const downloadButton = document.getElementById("downloadButton");
+    //const downloadButton = document.getElementById("downloadButton");
 
     const file = fileInput.files[0];
     if (file) {
@@ -111,8 +101,8 @@ function changePreviewPicture(fileInput) {
         reader.readAsDataURL(file);
 
         // Enable the download button
-        downloadButton.disabled = false;
-        downloadButton.style.display = "block";
+       // downloadButton.disabled = false;
+       // downloadButton.style.display = "block";
     } else {
         imagePreview.src = '';
     }

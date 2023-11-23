@@ -68,7 +68,6 @@
             <label for="input5" class="inputLabel"> Stem to ignore (N, S, E, or W) (Optional):</label>
             <input type="text" id="input5" name="input1" dValue ="" class="inputBox" oninput="validateDirection(this)" maxlength="1"> <br>  
             <input type="submit" value="Submit" class="submitButton">
-            <button type="button" value="yeet" onclick="yeetonthyfeet()">yuuh</button>
             <p id="lineSeparator"></p>
             <button id="downloadButton" disabled>Download Files</button>
         </form>
@@ -80,9 +79,6 @@
     <!-- Help Text and pictures -->
     <div id="help-text">
         <p>Here's an example of a high constrast image that needs to have the cell filled in with pink, as the cell is the same shade as the branches.</p>
-        <label for="HCExample">Yah boi:</label>
-        <img src="" id="tempPic" class="ExamplePicture"><br>
-
         <label for="HCExample">1.</label>
         <img src="outline.jpeg" id="HCExample" class="ExamplePicture">
         <label for="HCExamplePink">2.</label>
@@ -99,17 +95,17 @@
     <!-- Script for downloading image-->
     <script>
         downloadButton.addEventListener("click", function() {
-            downloadImage();
+            downloadZipFile();
         });
     </script>
 
     <!-- Script for Image Preview -->
     <script>
-        const fileInput = document.getElementById('file-input');
+        // const fileInput = document.getElementById('file-input');
 
-        fileInput.addEventListener('change', function () {
-            changePreviewPicture(fileInput);
-        });
+        // fileInput.addEventListener('change', function () {
+        //     changePreviewPicture(fileInput);
+        // });
     </script>
 
     <!-- Script for the Submit button -->
