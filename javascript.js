@@ -1,8 +1,9 @@
 let signedUrl = null;
 
 // Running the tracing
-function onFormSubmit() {
+async function onFormSubmit() {
 
+    console.log("Start of Tracing");
     // Gets an array of all the input fields
     const inputs = document.querySelectorAll('input[type="number"]');
 
@@ -20,14 +21,17 @@ function onFormSubmit() {
     const redCellBranch = document.getElementById('input2').value;
     const xOffset = document.getElementById('input3').value;
     const yOffset = document.getElementById('input4').value;
-    const stemToIgnore = document.getElementById('input5');
+    let stemToIgnore = document.getElementById('input5').value;
+    if (!stemToIgnore){
+        stemToIgnore = 0;
+    }
+    
     // Prepare the data to be sent
-   
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         const reader = new FileReader();
         
-        reader.onload = function(event) {
+        reader.onload = async function(event) {
             const imageData = event.target.result;
             const requestData = {
                 redBranch: parseInt(redBranch),
@@ -38,7 +42,41 @@ function onFormSubmit() {
                 imageData: imageData
             };
         
-            // Make a POST request to the API Gateway endpoint
+            const lambdaURL = 'https://kt7vclhx7jbrtdfews4k3sf2fa0ysjek.lambda-url.us-east-1.on.aws/';
+            const headers = {
+              'Content-Type': 'application/json',
+            };
+                    
+            const options = {
+              method: 'POST', 
+              headers: headers,
+              body: JSON.stringify(requestData),
+            };
+          
+            try {
+              const response = await fetch(lambdaURL, options);
+              const data = await response.text();
+              
+              const parsedResponse = JSON.parse(data);
+              signedUrl = parsedResponse.signedUrl;
+              const tracedExample = parsedResponse.tracedExample;
+            
+              const picToChange = document.getElementById("tracedPreview");
+              picToChange.src = "data:image/jpeg;base64," + tracedExample;
+              
+              // Enable the download button
+              const downloadButton = document.getElementById("downloadButton");
+              downloadButton.disabled = false;
+              downloadButton.style.display = "block";         
+              console.log("Image Processed")
+
+              // Handle the response data as needed
+            } catch (error) {
+              console.error('Error calling Lambda function:', error);
+              // Handle errors here
+            }
+                      
+           /* // Make a POST request to the API Gateway endpoint
             fetch('https://wytngibhdk.execute-api.us-east-1.amazonaws.com/dev/', {
                 method: 'POST',
                 headers: {
@@ -64,7 +102,7 @@ function onFormSubmit() {
             })
             .catch(error => {
                 console.error('Error:', error);
-            });
+            });*/
         };
 
         reader.readAsDataURL(file);
