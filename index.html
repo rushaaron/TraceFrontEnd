@@ -67,7 +67,7 @@
             <input type="number" id="input4" name="input1" min="5" max="100" step="1" value="40" dValue ="40" class="inputBox"><br>   
             <label for="input5" class="inputLabel"> Stem to ignore (N, S, E, or W) (Optional):</label>
             <input type="text" id="input5" name="input1" dValue ="" class="inputBox" oninput="validateDirection(this)" maxlength="1"> <br>  
-            <input type="submit" value="Submit" class="submitButton">
+            <input type="submit" id="submitButton" value="Submit" class="submitButton">
             <p id="lineSeparator"></p>
             <button id="downloadButton" disabled>Download Files</button>
         </form>
@@ -79,6 +79,8 @@
     <!-- Help Text and pictures -->
     <div id="help-text">
         <p>Here's an example of a high constrast image that needs to have the cell filled in with pink, as the cell is the same shade as the branches.</p>
+        <label for="HCExample">.5.</label>
+        <img src="BigTest3filled.jpg" id="HCExample" class="ExamplePicture">
         <label for="HCExample">1.</label>
         <img src="outline.jpeg" id="HCExample" class="ExamplePicture">
         <label for="HCExamplePink">2.</label>

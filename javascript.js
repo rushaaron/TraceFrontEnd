@@ -54,6 +54,7 @@ async function onFormSubmit() {
             };
           
             try {
+              changeSubmitToLoading()
               const response = await fetch(lambdaURL, options);
               const data = await response.text();
               
@@ -75,7 +76,8 @@ async function onFormSubmit() {
               console.error('Error calling Lambda function:', error);
               // Handle errors here
             }
-                      
+            changeLoadingToSubmit()
+
            /* // Make a POST request to the API Gateway endpoint
             fetch('https://wytngibhdk.execute-api.us-east-1.amazonaws.com/dev/', {
                 method: 'POST',
@@ -154,6 +156,33 @@ function downloadImage() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+}
+
+function changeSubmitToLoading() {
+    const submitButton = document.getElementById("submitButton");
+    submitButton.style.backgroundColor = 'rgb(199,182,0)';
+    submitButton.style.color = 'rgb(0,0,0)';
+    submitButton.value = 'Tracing In Progress'
+    submitButton.style.cursor = 'not-allowed';
+    submitButton.disabled = true;
+}
+
+function changeLoadingToSubmit() {
+    const submitButton = document.getElementById("submitButton");
+    submitButton.style.backgroundColor = 'rgb(46,112,184)';
+    submitButton.style.color = 'rgb(255,255,255)';
+    submitButton.value = 'Submit'
+    submitButton.style.cursor = 'pointer'; 
+    submitButton.disabled = false;
+
+    submitButton.onmouseover = function() {
+        this.style.backgroundColor = '#84FF87';
+        this.style.color = 'black';
+    };
+    submitButton.onmouseout = function() {
+        this.style.backgroundColor = 'rgb(46, 112, 184)';
+        this.style.color = 'rgb(255, 255, 255)';
+    };
 }
 
 // Validation only single direction fields were entered for the stem to ignore

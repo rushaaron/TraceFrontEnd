@@ -98,9 +98,12 @@ label {
   border: none;
   border-radius: 5px;
   width: 100%;
+  position: relative;
+  padding-right: 40px; /* Space for the loader */
+
 }
 
-input[type=submit]:hover {
+input[type=submit]:enabled:hover {
   background-color: #84FF87;
   color: black;
 }
@@ -112,7 +115,7 @@ input[type=submit]:hover {
 #downloadButton {
   /*display: none;*/
   padding: 7px;
-  background-color: #2E71B7;
+  background-color: hsl(211, 60%, 45%);
   color: whitesmoke;
   border: none;
   border-radius: 5px;
